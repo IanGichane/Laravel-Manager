@@ -9,8 +9,18 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+
     theme: {
+
+
         extend: {
+            colors: {
+
+                current: 'currentColor',
+                'white': '#ffffff',
+                'primary': '#f59e0b',
+               
+              },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

@@ -22,6 +22,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// in progress
+Route::get('/in-progress', function () {
+    return view('status.inprogress');
+})->middleware(['auth', 'verified'])->name('status.inprogress');
+
+// Completed tasks
+Route::get('/complete', function () {
+    return view('status.complete');
+})->middleware(['auth', 'verified'])->name('status.complete');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
