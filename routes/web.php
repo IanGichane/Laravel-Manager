@@ -23,7 +23,29 @@ Route::get('/dashboard', function () {
     return view('status.index');
 })->middleware(['auth', 'verified'])->name('status.index');
 
+
+
+// task crud
+
 Route::get('/dashboard', [TaskController::class,'index'])->middleware(['auth', 'verified'])->name('status.index');
+Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
+
+
+
+Route::post('/task',[TaskController::class ,'store'])->middleware(['auth', 'verified'])->name('task.store');
+Route::get('/task/{task}/edit', [TaskController::class, 'edit'])->name('task.edit');
+Route::put('/task/{task}/update', [TaskController::class, 'update'])->name('task.update');
+Route::delete('/task/{task}/destroy', [TaskController::class, 'destroy'])->name('task.destroy');
+
+
+// Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
+
+
+
+
+
 
 // in progress
 Route::get('/in-progress', function () {
@@ -34,6 +56,9 @@ Route::get('/in-progress', function () {
 Route::get('/complete', function () {
     return view('status.complete');
 })->middleware(['auth', 'verified'])->name('status.complete');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

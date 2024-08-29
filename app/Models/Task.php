@@ -25,8 +25,9 @@ class Task extends Model
     //     "user_id"
     // ];
 
-       // a task belongs to one user
-       public function user(){
-        return $this->belongs(User::class);
+    // a task belongs to one user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
- }
+}
