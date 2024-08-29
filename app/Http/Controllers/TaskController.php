@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
-
+// Entry to the users dashboard
     public function index(){
         $user = Auth::user();
         $tasks = $user->tasks;
 
         return view('status.index',['tasks' => $tasks]);
     }
+
+    // Navigate to view progress and completed tasks
     public function progress(){
         $inprogresstasks = Task::where('in_progress', 1)->get();
         return view('status.inprogress',['in_progress' => $inprogresstasks]);
@@ -26,12 +28,16 @@ class TaskController extends Controller
         return view('status.complete',['complete' => $completeTasks]);
     }
 
+    // route to the create view
     public function create(){
         return view('task.create');
     }
 
+    // create a new task and exit/back to the dashboard
     public function store(Request $request){
     //    dd($request);
+
+    // validate entries
     $data = $request->validate([
        'title' => ['required '],
         'description' => 'required',
