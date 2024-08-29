@@ -22,6 +22,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('status.index');
 })->middleware(['auth', 'verified'])->name('status.index');
+// in progress
+Route::get('/in-progress',[TaskController::class,'progress'])->middleware(['auth', 'verified'])->name('status.inprogress');
+
+// Completed tasks
+Route::get('/complete', [TaskController::class, 'complete'])->middleware(['auth', 'verified'])->name('status.complete');
+
 
 
 
@@ -39,24 +45,6 @@ Route::delete('/task/{task}/destroy', [TaskController::class, 'destroy'])->name(
 
 
 // Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
-
-
-
-
-
-
-
-// in progress
-Route::get('/in-progress', function () {
-    return view('status.inprogress');
-})->middleware(['auth', 'verified'])->name('status.inprogress');
-
-// Completed tasks
-Route::get('/complete', function () {
-    return view('status.complete');
-})->middleware(['auth', 'verified'])->name('status.complete');
-
 
 
 

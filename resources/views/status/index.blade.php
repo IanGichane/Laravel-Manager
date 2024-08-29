@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="py-4">
+    <div class="">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="p-6 ">
@@ -16,7 +16,18 @@
 
                     </div>
                 @else
-                    <div class="grid grid-cols-3 gap-3">
+                <div class="text-center mb-6">
+
+                    <a href={{ route('task.create') }}>
+                        <button
+                            class="text-xs leading-4 bg-gray-900 font-medium rounded-md text-white px-4 py-2 border-none transition-all duration-150 ease-in-out hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-transparent focus-visible:ring-offset-2">
+                            Create Task
+                        </button>
+                    </a>
+
+                </div>
+                    <div class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))]  auto-rows gap-3">
+
                         @foreach ($tasks as $task)
                             <div class="max-w-xs p-4 bg-white rounded-lg shadow-lg shadow-gray-200">
                                 <div class="flex items-center justify-between mt-4 gap-4">
@@ -36,9 +47,9 @@
                                     </a>
 
                                 </div>
-                                <p class="mt-4 text-sm leading-5 text-gray-600">
+                                <p class="mt-4 text-sm leading-5 text-gray-600 overflow-hidden">
                                     {{ $task->description }}
-                                    <a href="#" class="text-blue-500 hover:underline">Read cookies policies</a>.
+
                                 </p>
                                 {{-- status --}}
                                 <div class="flex items-center  mt-4 gap-4">
@@ -47,6 +58,7 @@
                                     <button
                                         class="text-xs leading-4 text-gray-800 underline transition-all duration-300 ease-in-out border-none bg-transparent hover:text-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-transparent focus-visible:ring-offset-2">
                                         {{ $task->in_progress }}
+                                        {{ $task->complete }}
                                     </button>
 
                                 </div>

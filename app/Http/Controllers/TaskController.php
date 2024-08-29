@@ -13,7 +13,15 @@ class TaskController extends Controller
         $tasks = Task::all();
         return view('status.index',['tasks' => $tasks]);
     }
+    public function progress(){
+        $inprogresstasks = Task::where('in_progress', 1)->get();
+        return view('status.inprogress',['in_progress' => $inprogresstasks]);
+    }
 
+    public function complete(){
+        $completeTasks = Task::where('complete', 1)->get();
+        return view('status.complete',['complete' => $completeTasks]);
+    }
 
     public function create(){
         return view('task.create');
@@ -24,9 +32,9 @@ class TaskController extends Controller
     $data = $request->validate([
        'title' => ['required '],
         'description' => 'required',
-        // 'inprogress' => 'nullable' ,
-        // 'complete' => 'nullable',
-        'due_date' => ['nullable','date']
+        'in_progress' => 'boolean' ,
+        'complete' => 'boolean',
+        'due_date' => ['date']
     ]);
 
     // $newTask = Task::create($data);
@@ -43,12 +51,25 @@ class TaskController extends Controller
         $data = $request->validate([
             'title' => ['required '],
              'description' => 'required',
-             // 'inprogress' => 'nullable' ,
-             // 'complete' => 'nullable',
-             'due_date' => ['nullable','date']
-         ]);
-         $task->update($data);
-         return redirect(route('status.index'));
+             'in_progress' =>['nullable', 'boolean'],
+             'complete' => ['nullable', 'boolean'],
+             'due_date' => ['date']
+        ]);
+
+
+        if ($request->has('complete')) {
+            $data['complete'] = 1;
+            $data['in_progress'] = 0;
+        }elseif ($request->has('in_progress')) {
+            $data['complete'] = 0;
+            $data['in_progress'] = 1;
+        } else {
+            $data['complete'] = 0;
+            $data['in_progress'] = 0;
+        }
+
+        $task->update($data);
+        return redirect(route('status.index'));
     }
 
 

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->uuid('id');
-            $table->unsignedBigInteger('user_id');
-            // Another way to add a relation between user and task:if a user is deleted the task is also deleted
-            //   $table->foreignid('user_id')->constrained()->onDelete('cascade);
+            // $table->unsignedBigInteger('user_id');
+            // // Another way to add a relation between user and task:if a user is deleted the task is also deleted
+            $table->foreignid('user_id')->constrained()->onDelete('cascade');
             $table->text('title')->nullable();
             $table->text('description')->nullable();
             $table->date('due_date');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('in_progress')->default(false);
             $table->timestamps();
 
-            $table->index('user_id');
+            // $table->index('user_id');
         });
     }
 
