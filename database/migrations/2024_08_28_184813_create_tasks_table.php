@@ -15,7 +15,10 @@ return new class extends Migration
             $table->uuid('id');
             // $table->unsignedBigInteger('user_id');
             // // Another way to add a relation between user and task:if a user is deleted the task is also deleted
-            $table->foreignid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->text('title')->nullable();
             $table->text('description')->nullable();
             $table->date('due_date');

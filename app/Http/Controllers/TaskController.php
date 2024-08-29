@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
 
 
     public function index(){
-        $tasks = Task::all();
+        $user = Auth::user();
+        $tasks = $user->tasks;
+
         return view('status.index',['tasks' => $tasks]);
     }
     public function progress(){
@@ -47,6 +50,7 @@ class TaskController extends Controller
         // dd($task);
         return view('task.edit',['task'=>$task]);
     }
+    
     public function update(Task $task ,Request $request){
         $data = $request->validate([
             'title' => ['required '],
@@ -68,14 +72,14 @@ class TaskController extends Controller
             $data['in_progress'] = 0;
         }
 
-        $task->update($data);
+        auth()->user()->$task->update($data);
         return redirect(route('status.index'));
     }
 
 
     public function destroy(Task $task){
         // dd($task);
-        $task->delete();
+        auth()->user()->$task->delete();
         return redirect(route('status.index'));
     }
 }
