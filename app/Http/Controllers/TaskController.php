@@ -42,7 +42,7 @@ class TaskController extends Controller
 
     // $newTask = Task::create($data);
     $newTask = auth()->user()->tasks()->create($data);
-    return redirect(route('status.index'));
+    return redirect(route('status.index'))->with('Message', 'Task created!');
     }
 
 
@@ -50,7 +50,7 @@ class TaskController extends Controller
         // dd($task);
         return view('task.edit',['task'=>$task]);
     }
-    
+
     public function update(Task $task ,Request $request){
         $data = $request->validate([
             'title' => ['required '],
@@ -72,14 +72,14 @@ class TaskController extends Controller
             $data['in_progress'] = 0;
         }
 
-        auth()->user()->$task->update($data);
-        return redirect(route('status.index'));
+        $task->update($data);
+        return redirect(route('status.index'))->with('Message', 'Task updated!');
     }
 
 
     public function destroy(Task $task){
         // dd($task);
         auth()->user()->$task->delete();
-        return redirect(route('status.index'));
+        return redirect(route('status.index'))->with('Message', 'Task deleted!');
     }
 }

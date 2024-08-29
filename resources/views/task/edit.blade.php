@@ -43,16 +43,16 @@
                 {{-- bool progress --}}
                 <div class="flex items-start space-y-">
                     <div class="flex items-center h-5">
-                        <input id="in_progress" type="radio" value="1" name="in_progress"
+                        <input id="in_progress" type="radio" value="0" name="in_progress"
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                            {{ old('in_progress', $task->in_progress ?? 0) == 0 ? 'checked' : '' }} />
+                            {{ old('in_progress', $task->in_progress ?? 1) == 0 ? 'checked' : '' }} />
                     </div>
                     <label for="in_progress" class="ms-2 text-sm font-medium text-gray-900 ">Inprogress</label>
                 </div>
                 {{-- bool complete --}}
                 <div class="flex items-start space-y-">
                     <div class="flex items-center h-5">
-                        <input id="complete" type="radio" value="1" name="complete"
+                        <input id="complete" type="radio" value="0" name="complete"
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                             {{ old('complete', $task->complete ?? 0) == 0 ? 'checked' : '' }} />
                     </div>
